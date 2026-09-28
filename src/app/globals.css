@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Brand */
+  --color-navy-950: #071427;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #132b4d;
+  --color-navy-700: #1e3a63;
+  --color-navy-600: #34507a;
+  --color-sky-500: #4f93c9;
+  --color-sky-400: #7ab0da;
+  --color-sky-100: #e3eef7;
+  --color-coral-600: #d4572f;
+  --color-coral-500: #e86a42;
+  --color-coral-100: #fbe6dd;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Neutrals (warm) */
+  --color-paper: #f7f5f0;
+  --color-sand: #efebe3;
+  --color-line: #e2ddd2;
+  --color-line-strong: #cfc8ba;
+  --color-ink: #16202f;
+  --color-muted: #5a6474;
+
+  --color-danger: #b42318;
+  --color-success: #1f6f4a;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --animate-rise: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-sky-100);
+    color: var(--color-navy-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sky-500);
+    outline-offset: 2px;
+  }
+
+  /* Native date picker icon tinted to match the brand */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.55;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Small uppercase label that sits above section headings */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-coral-600);
+  }
+
+  .prose-legal h2 {
+    margin-top: 2.25rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+  }
+
+  .prose-legal p,
+  .prose-legal li {
+    margin-top: 0.75rem;
+    line-height: 1.75;
+    color: var(--color-muted);
+  }
+
+  .prose-legal ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
 }
