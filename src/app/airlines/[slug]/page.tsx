@@ -160,7 +160,9 @@ export default async function AirlinePage({ params }: PageProps<"/airlines/[slug
         <section aria-labelledby="related-heading" className="border-t border-line py-14 lg:py-20">
           <div className="container-page">
             <h2 id="related-heading" className="text-2xl font-bold text-navy-900">
-              Other airlines from {airline.country}
+              {related.every((other) => other.country === airline.country)
+                ? `Other airlines from ${airline.country}`
+                : "Explore more airlines"}
             </h2>
             <AirlineGrid airlines={related} className="mt-8" />
           </div>

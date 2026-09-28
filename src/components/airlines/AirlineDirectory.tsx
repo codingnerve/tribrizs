@@ -8,11 +8,12 @@ import { cn } from "@/lib/utils";
 
 import { AirlineGrid } from "./AirlineGrid";
 
-const regionOrder: AirlineRegion[] = ["united-states", "united-kingdom"];
+const regionOrder: AirlineRegion[] = ["united-states", "united-kingdom", "middle-east"];
 
 const regionNotes: Record<AirlineRegion, string> = {
-  "united-states": "U.S. carriers with long-haul routes to Europe, Latin America, Asia and beyond.",
+  "united-states": "U.S. carriers with extensive domestic connections and international routes worldwide.",
   "united-kingdom": "British airlines connecting London and Manchester with destinations worldwide.",
+  "middle-east": "World-class Middle Eastern carriers offering premium long-haul service and global connections.",
 };
 
 type Filter = AirlineRegion | "all";

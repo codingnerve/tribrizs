@@ -14,7 +14,7 @@ export function AirlinePreview() {
             id="airlines-heading"
             eyebrow="Airlines"
             title="Explore Popular Airlines"
-            description="Major U.S. and U.K. airlines with international networks. We can help you look at flights on these and many other carriers."
+            description="Major U.S., U.K. and international airlines with global flight networks. We can help you look at flights on these and many other carriers."
           />
           <Link
             href="/airlines"

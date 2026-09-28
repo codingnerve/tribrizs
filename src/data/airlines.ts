@@ -3,13 +3,13 @@ import type { Airline, AirlineRegion } from "@/types/airline";
 export const regionLabels: Record<AirlineRegion, string> = {
   "united-states": "United States",
   "united-kingdom": "United Kingdom",
+  "middle-east": "Middle East",
 };
 
 /**
- * Reference information about airlines. The directory is intentionally limited
- * to U.S. and U.K. carriers. TRIBRIZS is an independent travel assistance
- * service and is not affiliated with any airline listed here. Keep entries
- * factual; avoid fares, rankings or claims that date quickly.
+ * Reference information about airlines. TRIBRIZS is an independent travel
+ * assistance service and is not affiliated with any airline listed here.
+ * Keep entries factual; avoid fares, rankings or claims that date quickly.
  */
 export const airlines: Airline[] = [
   {
@@ -63,6 +63,23 @@ export const airlines: Airline[] = [
     popularDestinations: ["London", "Frankfurt", "Tokyo", "Sydney", "Singapore", "Mexico City"],
   },
   {
+    name: "Southwest Airlines",
+    slug: "southwest-airlines",
+    iata: "WN",
+    brandColor: "#304CB2",
+    country: "United States",
+    region: "united-states",
+    hub: "Dallas Love Field (DAL)",
+    alliance: null,
+    shortDescription:
+      "Major U.S. airline known for point-to-point routes, domestic flexibility and Caribbean travel.",
+    description: [
+      "Southwest Airlines is one of the largest passenger airlines in the United States, headquartered in Dallas, Texas. Operating on a high-frequency point-to-point network, its key bases include Dallas Love Field, Denver, Las Vegas, Chicago Midway, Phoenix Sky Harbor and Baltimore/Washington.",
+      "Beyond its comprehensive U.S. domestic network, Southwest connects passengers to international leisure destinations across Mexico, Central America and the Caribbean.",
+    ],
+    popularDestinations: ["Cancún", "Punta Cana", "Montego Bay", "Cabo San Lucas", "Las Vegas", "Orlando", "Denver", "Phoenix"],
+  },
+  {
     name: "JetBlue",
     slug: "jetblue",
     iata: "B6",
@@ -110,6 +127,23 @@ export const airlines: Airline[] = [
     ],
     popularDestinations: ["New York", "Los Angeles", "Orlando", "Barbados", "Johannesburg", "Lagos"],
   },
+  {
+    name: "Emirates",
+    slug: "emirates",
+    iata: "EK",
+    brandColor: "#D71A21",
+    country: "United Arab Emirates",
+    region: "middle-east",
+    hub: "Dubai International (DXB)",
+    alliance: null,
+    shortDescription:
+      "Dubai-based global carrier connecting six continents via one of the world's most modern wide-body fleets.",
+    description: [
+      "Emirates is the flag carrier of the United Arab Emirates, headquartered in Dubai. Based at Dubai International Airport (DXB), Emirates is one of the world's premier international airlines, operating a modern wide-body fleet of Airbus A380 and Boeing 777 aircraft.",
+      "Connecting travelers across six continents, Emirates provides global long-haul connectivity linking North America, Europe, Africa, the Middle East, Asia and Australasia, renowned for its award-winning service and premium cabins.",
+    ],
+    popularDestinations: ["Dubai", "London", "Maldives", "Bangkok", "Mumbai", "Paris", "Singapore", "Sydney"],
+  },
 ];
 
 /** Airlines shown on the homepage preview, in display order. */
@@ -118,8 +152,8 @@ export const featuredAirlineSlugs = [
   "delta-air-lines",
   "united-airlines",
   "british-airways",
-  "virgin-atlantic",
-  "jetblue",
+  "emirates",
+  "southwest-airlines",
 ] as const;
 
 export function getAirlineBySlug(slug: string): Airline | undefined {
@@ -133,7 +167,12 @@ export function getFeaturedAirlines(): Airline[] {
 }
 
 export function getRelatedAirlines(airline: Airline, limit = 3): Airline[] {
-  return airlines
-    .filter((other) => other.region === airline.region && other.slug !== airline.slug)
-    .slice(0, limit);
+  const sameRegion = airlines.filter(
+    (other) => other.region === airline.region && other.slug !== airline.slug,
+  );
+  if (sameRegion.length > 0) {
+    return sameRegion.slice(0, limit);
+  }
+  return airlines.filter((other) => other.slug !== airline.slug).slice(0, limit);
 }
+

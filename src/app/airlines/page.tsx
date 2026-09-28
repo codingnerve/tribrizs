@@ -8,7 +8,7 @@ import { images } from "@/lib/images";
 
 const title = "Airline Directory";
 const description =
-  "Explore major U.S. and U.K. airlines, including American Airlines, Delta, United, British Airways and Virgin Atlantic, and get help finding international flights with TRIBRIZS.";
+  "Explore major U.S., U.K. and international airlines, including American Airlines, Delta, United, Southwest, British Airways, Virgin Atlantic and Emirates, and get help finding flights with TRIBRIZS.";
 
 export const metadata: Metadata = {
   title,
@@ -24,7 +24,7 @@ export default function AirlinesPage() {
       <PageHero
         eyebrow="Airlines"
         title="Airlines We Can Help You Explore"
-        description="Explore major U.S. and U.K. airlines and the international destinations they serve."
+        description="Explore major U.S., U.K. and international airlines and the destinations they serve worldwide."
         image={images.aircraftTerminal}
       />
 

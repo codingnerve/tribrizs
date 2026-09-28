@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "Which airlines can you help with?",
-    a: "We can help you look at options across many airlines. Our airline directory covers major U.S. and U.K. carriers; just ask if the one you want isn't listed.",
+    a: "We can help you look at options across many airlines. Our airline directory covers major U.S., U.K. and international carriers; just ask if the one you want isn't listed.",
   },
 ];
 
