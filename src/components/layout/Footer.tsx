@@ -98,12 +98,12 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-page flex flex-col gap-3 py-6 text-[0.8125rem] leading-relaxed text-white/50 md:flex-row md:justify-between md:gap-10">
-          <p className="shrink-0">© {year} TRIBRIZS. All rights reserved.</p>
+          <p className="shrink-0">© {year} {siteConfig.company.legalName}. All rights reserved.</p>
           <p className="max-w-2xl md:text-right">
-            TRIBRIZS provides travel enquiry and assistance services and is not an airline. Airline
-            names are trademarks of their respective owners and are used for identification only; no
-            affiliation or endorsement is implied. Fares and availability are confirmed by an agent
-            and are subject to airline terms.
+            {siteConfig.name} is operated by {siteConfig.company.legalName}. {siteConfig.name} provides
+            travel enquiry and assistance services and is not an airline. Airline names are trademarks
+            of their respective owners and are used for identification only; no affiliation or endorsement
+            is implied. Fares and availability are confirmed by an agent and are subject to airline terms.
           </p>
         </div>
       </div>

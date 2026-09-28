@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 // jurisdictions you advertise in (e.g. GDPR, CCPA) before launch.
 export default function PrivacyPage() {
   const { email } = siteConfig.contact;
+  const { legalName, attention, country } = siteConfig.company;
   return (
     <LegalPage title="Privacy Policy" updated="September 2026">
       <p>
-        This policy explains what information TRIBRIZS collects when you use this website and how that
-        information is used.
+        This privacy policy explains how <strong>{legalName}</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;), operating <strong>{siteConfig.name}</strong>, collects, uses, and safeguards information when you use this website.
       </p>
 
       <h2>Information we collect</h2>
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
       <h2>Retention</h2>
       <p>We keep enquiry information only for as long as needed to respond and for legitimate business records.</p>
 
-      <h2>Your choices</h2>
+      <h2>Your choices &amp; privacy rights</h2>
       <p>
         You can ask us to access, correct or delete the personal information we hold about you
         {email ? (
@@ -62,6 +62,24 @@ export default function PrivacyPage() {
         )}
         .
       </p>
+
+      <h2>Privacy compliance &amp; contact</h2>
+      <p>
+        If you have questions, comments, or requests regarding this Privacy Policy or our privacy practices, please contact our privacy compliance team:
+      </p>
+      <div className="rounded-xl border border-line bg-surface p-5 text-sm leading-relaxed text-navy-900">
+        <p className="font-bold text-base text-navy-950">{legalName}</p>
+        <p className="text-muted">Attn: {attention}</p>
+        <p className="text-muted">{country}</p>
+        {email && (
+          <p className="mt-2">
+            Email:{" "}
+            <a href={`mailto:${email}`} className="font-semibold text-navy-900 underline">
+              {email}
+            </a>
+          </p>
+        )}
+      </div>
 
       <h2>Changes</h2>
       <p>We may update this policy from time to time. The date at the top shows when it was last revised.</p>

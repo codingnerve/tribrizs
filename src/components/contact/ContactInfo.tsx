@@ -61,6 +61,13 @@ export function ContactInfo() {
           is booked without your confirmation.
         </p>
       </div>
+
+      <div className="mt-6 rounded-xl border border-line bg-surface p-5 text-sm">
+        <p className="text-xs font-bold tracking-[0.12em] text-muted uppercase">Operating Entity</p>
+        <p className="mt-2 font-bold text-navy-950">{siteConfig.company.legalName}</p>
+        <p className="text-muted">Attn: {siteConfig.company.attention}</p>
+        <p className="text-muted">{siteConfig.company.country}</p>
+      </div>
     </div>
   );
 }

@@ -19,6 +19,11 @@ export const siteConfig = {
     email: optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
     hours: optional(process.env.NEXT_PUBLIC_BUSINESS_HOURS),
   },
+  company: {
+    legalName: "Travolie.com, LLC",
+    attention: "Privacy Compliance Team",
+    country: "United States",
+  },
 } as const;
 
 export const mainNav = [
