@@ -21,7 +21,11 @@ const faqs = [
   },
   {
     q: "How will an agent contact me?",
-    a: "We'll reach you by phone or email using the details you provide, to talk through your trip and any questions you have.",
+    a: "We'll reach you by phone or email using the details you provide. You can also reach our travel assistance team directly by calling +1 (877) 370-5969.",
+  },
+  {
+    q: "Can I call and speak to an agent directly?",
+    a: "Yes! You can call our toll-free number +1 (877) 370-5969 to speak directly with an experienced travel specialist.",
   },
   {
     q: "Can you help with multi-city or group trips?",

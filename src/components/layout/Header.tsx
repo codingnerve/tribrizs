@@ -82,7 +82,7 @@ export function Header() {
           {phone && phoneHref && (
             <a
               href={phoneHref}
-              className="hidden items-center gap-2 text-[0.9375rem] font-semibold text-navy-900 hover:text-navy-700 lg:inline-flex"
+              className="hidden items-center gap-2 text-[0.9375rem] font-semibold text-navy-900 hover:text-navy-700 md:inline-flex"
             >
               <PhoneIcon className="text-coral-600" /> {phone}
             </a>

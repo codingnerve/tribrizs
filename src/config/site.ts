@@ -3,7 +3,8 @@ function optional(value: string | undefined): string | null {
   return trimmed ? trimmed : null;
 }
 
-const phone = optional(process.env.NEXT_PUBLIC_CONTACT_PHONE);
+const defaultPhone = "+1 (877) 370-5969";
+const phone = optional(process.env.NEXT_PUBLIC_CONTACT_PHONE) ?? defaultPhone;
 
 export const siteConfig = {
   name: "TRIBRIZS",
@@ -12,12 +13,14 @@ export const siteConfig = {
     "Get personalized assistance with international flights and travel planning. Contact TRIBRIZS to explore flight options and travel services.",
   tagline: "International flight assistance and travel planning",
   contact: {
-    /** Display format, e.g. "+1 (555) 010-2030". Null until a real number is configured. */
+    /** Display format, e.g. "+1 (877) 370-5969" */
     phone,
     /** tel: href derived from the display number. */
-    phoneHref: phone ? `tel:${phone.replace(/[^\d+]/g, "")}` : null,
+    phoneHref: phone
+      ? `tel:${phone.replace(/[^\d+]/g, "").startsWith("+") ? phone.replace(/[^\d+]/g, "") : `+${phone.replace(/[^\d]/g, "")}`}`
+      : null,
     email: optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
-    hours: optional(process.env.NEXT_PUBLIC_BUSINESS_HOURS),
+    hours: optional(process.env.NEXT_PUBLIC_BUSINESS_HOURS) ?? "24/7 Phone Assistance",
   },
   company: {
     legalName: "Travolie.com, LLC",

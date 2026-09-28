@@ -45,7 +45,7 @@ export function Hero() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href={agentHref} variant="light" size="lg">
               {phone && <PhoneIcon />}
-              Talk to a Travel Agent
+              {phone ? `Call ${phone}` : "Talk to a Travel Agent"}
             </ButtonLink>
             <ButtonLink href="#flight-enquiry" variant="ghost-light" size="lg" className="lg:hidden">
               Request a Flight

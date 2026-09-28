@@ -1,10 +1,13 @@
 import Image from "next/image";
 
 import { ButtonLink } from "@/components/ui/Button";
-import { agentHref } from "@/config/site";
+import { PhoneIcon } from "@/components/ui/Icons";
+import { siteConfig } from "@/config/site";
 import { images } from "@/lib/images";
 
 export function FinalCTA() {
+  const { phone, phoneHref } = siteConfig.contact;
+
   return (
     <section aria-labelledby="cta-heading" className="relative isolate overflow-hidden bg-navy-950">
       <Image
@@ -31,12 +34,17 @@ export function FinalCTA() {
           <p className="mt-4 text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg">
             Tell us your travel plans and let our team help you explore your options.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href={agentHref} size="lg">
-              Talk to an Agent
-            </ButtonLink>
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            {phone && phoneHref ? (
+              <a
+                href={phoneHref}
+                className="inline-flex h-12 items-center justify-center gap-2.5 rounded-[var(--radius-md)] bg-coral-500 px-6 text-[0.9375rem] font-bold text-white shadow-sm transition-colors hover:bg-coral-600"
+              >
+                <PhoneIcon /> Call {phone}
+              </a>
+            ) : null}
             <ButtonLink href="/contact" variant="ghost-light" size="lg">
-              Contact Us
+              Contact Us Online
             </ButtonLink>
           </div>
         </div>
