@@ -5,9 +5,14 @@ function optional(value: string | undefined): string | null {
 
 const defaultPhone = "+1 (877) 370-5969";
 const phone = optional(process.env.NEXT_PUBLIC_CONTACT_PHONE) ?? defaultPhone;
+const defaultEmail = "support@tribrizs.com";
+const email = optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? defaultEmail;
+const defaultGtagId = "AW-18481256480";
+const gtagId = optional(process.env.NEXT_PUBLIC_GTAG_ID) ?? defaultGtagId;
 
 export const siteConfig = {
   name: "TRIBRIZS",
+  gtagId,
   url: (optional(process.env.NEXT_PUBLIC_SITE_URL) ?? "https://tribrizs.com").replace(/\/$/, ""),
   description:
     "Get personalized assistance with international flights and travel planning. Contact TRIBRIZS to explore flight options and travel services.",
@@ -19,7 +24,7 @@ export const siteConfig = {
     phoneHref: phone
       ? `tel:${phone.replace(/[^\d+]/g, "").startsWith("+") ? phone.replace(/[^\d+]/g, "") : `+${phone.replace(/[^\d]/g, "")}`}`
       : null,
-    email: optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
+    email,
     hours: optional(process.env.NEXT_PUBLIC_BUSINESS_HOURS) ?? "24/7 Phone Assistance",
   },
   company: {
