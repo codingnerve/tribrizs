@@ -1,4 +1,11 @@
-export type AirlineRegion = "united-states" | "united-kingdom" | "middle-east";
+export type AirlineRegion =
+  | "united-states"
+  | "americas"
+  | "united-kingdom"
+  | "europe"
+  | "middle-east"
+  | "asia-pacific"
+  | "africa";
 
 export interface Airline {
   name: string;
