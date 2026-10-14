@@ -3,7 +3,7 @@ function optional(value: string | undefined): string | null {
   return trimmed ? trimmed : null;
 }
 
-const defaultPhone = "+1 (877) 370-5969";
+const defaultPhone = "+1 (833) 581-2296";
 const phone = optional(process.env.NEXT_PUBLIC_CONTACT_PHONE) ?? defaultPhone;
 const defaultEmail = "support@tribrizs.com";
 const email = optional(process.env.NEXT_PUBLIC_CONTACT_EMAIL) ?? defaultEmail;
@@ -18,7 +18,7 @@ export const siteConfig = {
     "Get personalized assistance with international flights and travel planning. Contact TRIBRIZS to explore flight options and travel services.",
   tagline: "International flight assistance and travel planning",
   contact: {
-    /** Display format, e.g. "+1 (877) 370-5969" */
+    /** Display format, e.g. "+1 (833) 581-2296" */
     phone,
     /** tel: href derived from the display number. */
     phoneHref: phone

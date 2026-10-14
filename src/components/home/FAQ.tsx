@@ -1,6 +1,9 @@
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { siteConfig } from "@/config/site";
+
+const phoneDisplay = siteConfig.contact.phone ?? "+1 (833) 581-2296";
 
 const faqs = [
   {
@@ -21,11 +24,11 @@ const faqs = [
   },
   {
     q: "How will an agent contact me?",
-    a: "We'll reach you by phone or email using the details you provide. You can also reach our travel assistance team directly by calling +1 (877) 370-5969.",
+    a: `We'll reach you by phone or email using the details you provide. You can also reach our travel assistance team directly by calling ${phoneDisplay}.`,
   },
   {
     q: "Can I call and speak to an agent directly?",
-    a: "Yes! You can call our toll-free number +1 (877) 370-5969 to speak directly with an experienced travel specialist.",
+    a: `Yes! You can call our toll-free number ${phoneDisplay} to speak directly with an experienced travel specialist.`,
   },
   {
     q: "Can you help with multi-city or group trips?",
