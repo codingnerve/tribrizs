@@ -1,7 +1,7 @@
 import "server-only";
 
 export interface Lead {
-  type: "flight-enquiry" | "contact-enquiry" | "radio-enquiry";
+  type: "flight-enquiry" | "contact-enquiry";
   reference: string;
   submittedAt: string;
   /** Page the enquiry was sent from (useful for ad campaign attribution). */

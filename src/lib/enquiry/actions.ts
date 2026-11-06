@@ -7,14 +7,11 @@ import {
   hasErrors,
   normalizeContactEnquiry,
   normalizeFlightEnquiry,
-  normalizeRadioEnquiry,
   validateContactEnquiry,
   validateFlightEnquiry,
-  validateRadioEnquiry,
   type ContactEnquiryInput,
   type EnquiryState,
   type FlightEnquiryInput,
-  type RadioEnquiryInput,
 } from "./schema";
 
 const DELIVERY_FAILED =
@@ -45,20 +42,6 @@ export async function submitFlightEnquiry(
     return { status: "error", message: "Please check the highlighted fields.", fieldErrors };
   }
   return send("flight-enquiry", { ...input });
-}
-
-export async function submitRadioEnquiry(
-  _prev: EnquiryState<RadioEnquiryInput>,
-  raw: RadioEnquiryInput,
-): Promise<EnquiryState<RadioEnquiryInput>> {
-  const { company, ...input } = normalizeRadioEnquiry(raw);
-  if (company) return { status: "success", reference: createReference() };
-
-  const fieldErrors = validateRadioEnquiry({ ...input, company });
-  if (hasErrors(fieldErrors)) {
-    return { status: "error", message: "Please check the highlighted fields.", fieldErrors };
-  }
-  return send("radio-enquiry", { ...input });
 }
 
 export async function submitContactEnquiry(
