@@ -17,6 +17,12 @@ import destDubai from "../../public/images/dest-dubai.jpg";
 import destTokyo from "../../public/images/dest-tokyo.jpg";
 import destRome from "../../public/images/dest-rome.jpg";
 import destBali from "../../public/images/dest-bali.jpg";
+import radioHero from "../../public/images/radio/hero.jpg";
+import radioActivation from "../../public/images/radio/activation.jpg";
+import radioSignal from "../../public/images/radio/signal.jpg";
+import radioChannels from "../../public/images/radio/channels.jpg";
+import radioSubscription from "../../public/images/radio/subscription.jpg";
+import radioSpecialist from "../../public/images/radio/specialist.jpg";
 
 export interface SiteImage {
   src: StaticImageData;
@@ -83,4 +89,32 @@ export const destinationImages = {
   tokyo: { src: destTokyo, alt: "A busy, neon-lit shopping street in Tokyo" },
   rome: { src: destRome, alt: "The Colosseum in Rome in early evening light" },
   bali: { src: destBali, alt: "A lakeside temple in Bali surrounded by mist and trees" },
+} satisfies Record<string, SiteImage>;
+
+/** Satellite radio assistance photography, used on /radio. */
+export const radioImages = {
+  hero: {
+    src: radioHero,
+    alt: "Modern vehicle interior with touchscreen infotainment display playing audio",
+  },
+  activation: {
+    src: radioActivation,
+    alt: "Driver tapping on car touchscreen infotainment system to access radio channels",
+  },
+  signal: {
+    src: radioSignal,
+    alt: "Driver navigating an open road with clear line of sight to the sky for satellite reception",
+  },
+  channels: {
+    src: radioChannels,
+    alt: "In-car digital media receiver displaying audio stations, navigation and controls",
+  },
+  subscription: {
+    src: radioSubscription,
+    alt: "Modern car dashboard and center console with connected media system",
+  },
+  specialist: {
+    src: radioSpecialist,
+    alt: "Friendly satellite radio support specialist ready to assist over the phone",
+  },
 } satisfies Record<string, SiteImage>;

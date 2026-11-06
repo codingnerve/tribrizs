@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { PageHero } from "@/components/layout/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon, PhoneIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
-import { images } from "@/lib/images";
+import { radioImages } from "@/lib/images";
 
 const title = "In-Car Satellite Radio Help";
 const description =
@@ -25,18 +26,22 @@ const services = [
   {
     title: "Radio activation",
     text: "A new or second-hand car, or a radio that has never been switched on. We explain what the receiver needs before it can play.",
+    image: radioImages.activation,
   },
   {
     title: "Signal & reception",
     text: "\"Acquiring signal\" that never clears, or audio that drops under bridges and in built-up areas. We help you rule out the usual causes.",
+    image: radioImages.signal,
   },
   {
     title: "Missing channels",
     text: "Channels that vanished after a trial ended, or a lineup that looks smaller than it should. We help you work out why.",
+    image: radioImages.channels,
   },
   {
     title: "Subscription questions",
     text: "Renewal messages, plan changes and unexpected on-screen notices explained in plain English.",
+    image: radioImages.subscription,
   },
 ];
 
@@ -141,7 +146,7 @@ export default function RadioPage() {
         eyebrow="Satellite radio help"
         title="Get your car's satellite radio sorted, with straight answers."
         description="Activation trouble, signal drops, missing channels or a confusing renewal? Call us and we'll help you work out the next step."
-        image={images.travelAgent}
+        image={radioImages.hero}
       >
         {phone && phoneHref && (
           <div className="mt-8">
@@ -169,13 +174,32 @@ export default function RadioPage() {
             id="services-heading"
             eyebrow="How we can help"
             title="Four things drivers ask us about most"
+            description="From getting an unfamiliar receiver set up to troubleshooting missing stations and signal drops, our team walks you through the next step."
           />
-          <ul className="mt-10 grid border-t border-l border-line sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <li key={s.title} className="border-r border-b border-line bg-white p-6">
-                <span className="text-sm font-semibold text-coral-600 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 text-lg font-bold text-navy-900">{s.title}</h3>
-                <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">{s.text}</p>
+              <li
+                key={s.title}
+                className="group flex flex-col overflow-hidden border border-line bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-sand">
+                  <Image
+                    src={s.image.src}
+                    alt={s.image.alt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    quality={70}
+                    placeholder="blur"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 bg-navy-950/85 px-2.5 py-1 text-xs font-semibold tabular-nums text-white backdrop-blur-xs">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg font-bold text-navy-900">{s.title}</h3>
+                  <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">{s.text}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -265,10 +289,35 @@ export default function RadioPage() {
         </div>
       </section>
 
-      <section aria-labelledby="radio-cta-heading" className="bg-navy-950">
-        <div className="container-page py-20 text-white lg:py-24">
-          <div className="max-w-xl">
-            <h2 id="radio-cta-heading" className="text-[1.875rem] leading-[1.12] font-bold tracking-[-0.015em] text-balance sm:text-[2.25rem]">
+      <section aria-labelledby="radio-cta-heading" className="bg-navy-950 text-white">
+        <div className="container-page grid items-center gap-10 py-16 lg:grid-cols-12 lg:gap-16 lg:py-24">
+          <div className="relative order-2 lg:col-span-5">
+            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-[5/4]">
+              <Image
+                src={radioImages.specialist.src}
+                alt={radioImages.specialist.alt}
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                quality={70}
+                placeholder="blur"
+                className="object-cover object-top"
+              />
+            </div>
+            <p className="absolute bottom-4 left-4 inline-flex items-center gap-2 bg-white px-4 py-2 text-sm font-semibold text-navy-900 shadow-lg sm:bottom-6 sm:left-6">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-success opacity-60 motion-safe:animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
+              </span>
+              Real people, ready to help
+            </p>
+          </div>
+
+          <div className="order-1 lg:col-span-7">
+            <p className="eyebrow text-sky-400">Speak with support</p>
+            <h2
+              id="radio-cta-heading"
+              className="mt-3 text-[1.875rem] leading-[1.12] font-bold tracking-[-0.015em] text-balance text-white sm:text-[2.25rem]"
+            >
               Ready for straight answers?
             </h2>
             <p className="mt-4 text-[1.0625rem] leading-relaxed text-white/80">
