@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 import { PageHero } from "@/components/layout/PageHero";
-import { RadioEnquiryForm } from "@/components/radio/RadioEnquiryForm";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon, PhoneIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -11,7 +9,7 @@ import { images } from "@/lib/images";
 
 const title = "In-Car Satellite Radio Help";
 const description =
-  "Independent help with in-car satellite radio: activation, signal drops, missing channels and subscription questions. Tell us what you're seeing and we'll point you to the next step.";
+  "Independent help with in-car satellite radio: activation, signal drops, missing channels and subscription questions. Call us and we'll point you to the next step.";
 
 export const metadata: Metadata = {
   title,
@@ -44,12 +42,12 @@ const services = [
 
 const steps = [
   {
-    title: "Tell us what you're seeing",
-    text: "Send an enquiry or call. Mention the message on the screen and anything you've already tried.",
+    title: "Give us a call",
+    text: "Mention the message on the screen and anything you've already tried.",
   },
   {
-    title: "We review and reply",
-    text: "A member of the team reads your details and replies by phone or email, whichever you prefer.",
+    title: "We listen and ask questions",
+    text: "A member of the team talks through what you're seeing and what the radio is doing.",
   },
   {
     title: "We work through the next step",
@@ -86,10 +84,10 @@ const issues = [
 
 const commitments = [
   "We are independent and are not affiliated with any satellite radio provider or car manufacturer.",
-  "We never ask for card numbers or passwords. Please don't include them in a message.",
-  "You choose how we reply: phone or email.",
+  "We never ask for card numbers or passwords. Please don't share them on a call.",
+  "You speak to a real person, not a menu of recordings.",
   "You get plain-English next steps, not jargon.",
-  "We only use your details to answer your enquiry.",
+  "We only use what you tell us to answer your question.",
 ];
 
 const wontDo = [
@@ -109,12 +107,12 @@ const faqs = [
     a: "We help you understand what you're seeing and what to try next, whether that is activation, a weak signal, missing channels or a subscription message. If the fix needs your provider or dealer, we tell you so.",
   },
   {
-    q: "Does it cost anything to send an enquiry?",
-    a: "No. Sending an enquiry is free and doesn't commit you to anything.",
+    q: "Does it cost anything to call?",
+    a: "No. Calling us doesn't commit you to anything.",
   },
   {
-    q: "What should I include in my enquiry?",
-    a: "Your car's make and model, the radio or provider if you know it, the exact message on the screen, and what you've already tried. Never include card numbers or passwords.",
+    q: "What should I have ready when I call?",
+    a: "Your car's make and model, the radio or provider if you know it, the exact message on the screen, and what you've already tried. Never share card numbers or passwords.",
   },
   {
     q: "What does \"acquiring signal\" mean?",
@@ -142,21 +140,20 @@ export default function RadioPage() {
       <PageHero
         eyebrow="Satellite radio help"
         title="Get your car's satellite radio sorted, with straight answers."
-        description="Activation trouble, signal drops, missing channels or a confusing renewal? Tell us what you're seeing and we'll help you work out the next step."
+        description="Activation trouble, signal drops, missing channels or a confusing renewal? Call us and we'll help you work out the next step."
         image={images.travelAgent}
       >
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <ButtonLink href="#enquiry" size="lg">
-            Send an enquiry
-          </ButtonLink>
-          <ButtonLink href="#how-it-works" size="lg" variant="outline">
-            See how it works
-          </ButtonLink>
-        </div>
+        {phone && phoneHref && (
+          <div className="mt-8">
+            <ButtonLink href={phoneHref} size="lg">
+              <PhoneIcon /> Call {phone}
+            </ButtonLink>
+          </div>
+        )}
         <ul className="mt-8 space-y-2 text-[0.9375rem] text-navy-900">
           {[
             "Independent, not a satellite radio provider",
-            "Reply by phone or email, your choice",
+            "Talk to a real person by phone",
             "We never ask for card numbers or passwords",
           ].map((item) => (
             <li key={item} className="flex items-start gap-2.5">
@@ -166,30 +163,7 @@ export default function RadioPage() {
         </ul>
       </PageHero>
 
-      <section id="enquiry" aria-label="Enquiry form" className="scroll-mt-20 border-b border-line py-14 lg:py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-4">
-            <SectionHeading
-              eyebrow="Quick request"
-              title="Tell us what's going on"
-              description="Fill in the form and a member of the team will reply by phone or email. It's free and doesn't commit you to anything."
-            />
-            {phone && phoneHref && (
-              <a
-                href={phoneHref}
-                className="mt-6 inline-flex items-center gap-2 font-semibold text-navy-900 underline decoration-navy-900/30 underline-offset-4 hover:decoration-navy-900"
-              >
-                <PhoneIcon className="text-coral-600" /> Prefer to talk? Call {phone}
-              </a>
-            )}
-          </div>
-          <div className="border border-line bg-white p-5 sm:p-8 lg:col-span-8 lg:p-10">
-            <RadioEnquiryForm />
-          </div>
-        </div>
-      </section>
-
-      <section id="services" aria-labelledby="services-heading" className="scroll-mt-20 py-20 lg:py-28">
+      <section id="services" aria-labelledby="services-heading" className="py-20 lg:py-28">
         <div className="container-page">
           <SectionHeading
             id="services-heading"
@@ -208,7 +182,7 @@ export default function RadioPage() {
         </div>
       </section>
 
-      <section id="how-it-works" aria-labelledby="how-heading" className="scroll-mt-20 bg-navy-950 py-20 text-white lg:py-28">
+      <section id="how-it-works" aria-labelledby="how-heading" className="bg-navy-950 py-20 text-white lg:py-28">
         <div className="container-page">
           <SectionHeading id="how-heading" tone="light" eyebrow="How support works" title="Three simple steps" />
           <ol className="mt-10 grid gap-8 md:grid-cols-3">
@@ -229,7 +203,7 @@ export default function RadioPage() {
             id="issues-heading"
             eyebrow="Common radio issues"
             title="Does any of this sound familiar?"
-            description="These are the situations we hear about most. If yours isn't here, send us the details anyway."
+            description="These are the situations we hear about most. If yours isn't here, call us anyway."
           />
           <ul className="mt-10 grid gap-x-12 border-t border-line md:grid-cols-2">
             {issues.map((issue) => (
@@ -273,16 +247,6 @@ export default function RadioPage() {
         <div className="container-page grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <SectionHeading id="radio-faq-heading" eyebrow="Troubleshooting FAQ" title="Quick answers" />
-            <p className="mt-4 leading-relaxed text-muted">
-              Still stuck?{" "}
-              <Link
-                href="#enquiry"
-                className="font-semibold text-navy-900 underline decoration-navy-900/30 underline-offset-4 hover:decoration-navy-900"
-              >
-                Send us an enquiry
-              </Link>
-              .
-            </p>
           </div>
           <div className="border-t border-line lg:col-span-8">
             {faqs.map(({ q, a }) => (
@@ -310,19 +274,13 @@ export default function RadioPage() {
             <p className="mt-4 text-[1.0625rem] leading-relaxed text-white/80">
               Tell us what your radio is doing and we&apos;ll help you find the next step.
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <ButtonLink href="#enquiry" size="lg">
-                Send an enquiry
-              </ButtonLink>
-              {phone && phoneHref && (
-                <a
-                  href={phoneHref}
-                  className="inline-flex h-13 items-center justify-center gap-2.5 rounded-[var(--radius-md)] border border-white/40 px-7 font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
-                >
+            {phone && phoneHref && (
+              <div className="mt-8">
+                <ButtonLink href={phoneHref} size="lg">
                   <PhoneIcon /> Call {phone}
-                </a>
-              )}
-            </div>
+                </ButtonLink>
+              </div>
+            )}
             <p className="mt-8 text-sm leading-relaxed text-white/60">
               TRIBRIZS is an independent assistance service and is not a satellite radio provider. It is not affiliated with
               any provider or vehicle manufacturer.
