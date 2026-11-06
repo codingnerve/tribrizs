@@ -37,6 +37,7 @@ export const siteConfig = {
 export const mainNav = [
   { label: "Home", href: "/" },
   { label: "Airlines", href: "/airlines" },
+  { label: "Radio", href: "/radio" },
   { label: "Contact Us", href: "/contact" },
 ] as const;
 

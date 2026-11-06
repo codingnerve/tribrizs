@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: absoluteUrl("/"), lastModified, changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/airlines"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/radio"), lastModified, changeFrequency: "yearly", priority: 0.5 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "yearly", priority: 0.8 },
     ...airlines.map((airline) => ({
       url: absoluteUrl(`/airlines/${airline.slug}`),
