@@ -40,6 +40,35 @@ export interface ContactEnquiryInput {
   company: string;
 }
 
+export const radioTopics = [
+  { value: "activation", label: "Radio activation" },
+  { value: "signal", label: "Signal or reception" },
+  { value: "missing-channels", label: "Missing channels" },
+  { value: "subscription", label: "Subscription question" },
+  { value: "other", label: "Something else" },
+] as const;
+
+export type RadioTopic = (typeof radioTopics)[number]["value"];
+
+export const replyPreferences = [
+  { value: "phone", label: "Call me" },
+  { value: "email", label: "Email me" },
+] as const;
+
+export type ReplyPreference = (typeof replyPreferences)[number]["value"];
+
+export interface RadioEnquiryInput {
+  name: string;
+  email: string;
+  phone: string;
+  topic: RadioTopic | "";
+  vehicle: string;
+  radioProvider: string;
+  message: string;
+  replyPreference: ReplyPreference;
+  company: string;
+}
+
 export type FieldErrors<T> = Partial<Record<keyof T, string>>;
 
 export const emptyFlightEnquiry: FlightEnquiryInput = {
@@ -67,7 +96,19 @@ export const emptyContactEnquiry: ContactEnquiryInput = {
   company: "",
 };
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+export const emptyRadioEnquiry: RadioEnquiryInput = {
+  name: "",
+  email: "",
+  phone: "",
+  topic: "",
+  vehicle: "",
+  radioProvider: "",
+  message: "",
+  replyPreference: "phone",
+  company: "",
+};
+
+const EMAIL_RE =/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_CHARS_RE = /^[+\d\s().-]+$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -144,6 +185,25 @@ export function normalizeContactEnquiry(raw: unknown): ContactEnquiryInput {
   };
 }
 
+export function normalizeRadioEnquiry(raw: unknown): RadioEnquiryInput {
+  const r = (raw ?? {}) as Record<string, unknown>;
+  const topic = radioTopics.some((t) => t.value === r.topic) ? (r.topic as RadioTopic) : "";
+  const replyPreference = replyPreferences.some((p) => p.value === r.replyPreference)
+    ? (r.replyPreference as ReplyPreference)
+    : "phone";
+  return {
+    name: clean(r.name, 120),
+    email: clean(r.email, 160),
+    phone: clean(r.phone, 40),
+    topic,
+    vehicle: clean(r.vehicle, 120),
+    radioProvider: clean(r.radioProvider, 120),
+    message: clean(r.message, 2000),
+    replyPreference,
+    company: clean(r.company, 120),
+  };
+}
+
 /** Step one of the flight enquiry: where and when. */
 export function validateTripDetails(v: FlightEnquiryInput): FieldErrors<FlightEnquiryInput> {
   const errors: FieldErrors<FlightEnquiryInput> = {};
@@ -193,6 +253,30 @@ export function validateContactEnquiry(v: ContactEnquiryInput): FieldErrors<Cont
   if (sameCity(v.from, v.to)) errors.to = "Destination should be different from departure.";
   if (!v.message) errors.message = "Tell us a little about your trip or question.";
   else if (v.message.length < 10) errors.message = "Please add a few more details so we can help.";
+  return errors;
+}
+
+/** 13-19 digits (spaces/dashes allowed) looks like a payment card number. */
+function looksLikeCardNumber(text: string): boolean {
+  return /(?:\d[ -]?){13,19}/.test(text);
+}
+
+export function validateRadioEnquiry(v: RadioEnquiryInput): FieldErrors<RadioEnquiryInput> {
+  const errors: FieldErrors<RadioEnquiryInput> = {};
+  const name = validateName(v.name);
+  const email = validateEmail(v.email);
+  // Phone is only required when the visitor wants a call back; otherwise
+  // it is optional but must still be valid if given.
+  const phone = v.phone || v.replyPreference === "phone" ? validatePhone(v.phone) : undefined;
+  if (name) errors.name = name;
+  if (email) errors.email = email;
+  if (phone) errors.phone = phone;
+  if (!v.topic) errors.topic = "Please choose what you need help with.";
+  if (!v.message) errors.message = "Tell us what your radio is doing.";
+  else if (v.message.length < 10) errors.message = "Please add a few more details so we can help.";
+  else if (looksLikeCardNumber(v.message)) {
+    errors.message = "Please remove any card or account numbers. We never need them.";
+  }
   return errors;
 }
 

@@ -8,10 +8,15 @@ import { CheckIcon, PhoneIcon } from "@/components/ui/Icons";
 interface EnquirySuccessProps {
   reference: string;
   onRestart: () => void;
+  /** Overrides the default (flight) follow-up text. */
+  message?: string;
 }
 
+const defaultMessage =
+  "Thank you. A travel agent will contact you to talk through suitable flight options for your trip. Nothing has been booked or charged.";
+
 /** Shown after a successful submission. Never implies a booking was made. */
-export function EnquirySuccess({ reference, onRestart }: EnquirySuccessProps) {
+export function EnquirySuccess({ reference, onRestart, message = defaultMessage }: EnquirySuccessProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const { phone, phoneHref } = siteConfig.contact;
 
@@ -27,10 +32,7 @@ export function EnquirySuccess({ reference, onRestart }: EnquirySuccessProps) {
       <h3 ref={headingRef} tabIndex={-1} className="mt-5 text-xl font-bold text-navy-900 focus:outline-none">
         Your enquiry has been received.
       </h3>
-      <p className="mt-2 leading-relaxed text-muted">
-        Thank you. A travel agent will contact you to talk through suitable flight options for your
-        trip. Nothing has been booked or charged.
-      </p>
+      <p className="mt-2 leading-relaxed text-muted">{message}</p>
       <p className="mt-4 text-sm text-muted">
         Enquiry reference: <span className="font-semibold tracking-wide text-navy-900">{reference}</span>
       </p>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { PageHero } from "@/components/layout/PageHero";
+import { RadioEnquiryForm } from "@/components/radio/RadioEnquiryForm";
 import { ButtonLink } from "@/components/ui/Button";
 import { CheckIcon, PhoneIcon } from "@/components/ui/Icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -145,7 +146,7 @@ export default function RadioPage() {
         image={images.travelAgent}
       >
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <ButtonLink href="/contact" size="lg">
+          <ButtonLink href="#enquiry" size="lg">
             Send an enquiry
           </ButtonLink>
           <ButtonLink href="#how-it-works" size="lg" variant="outline">
@@ -164,6 +165,29 @@ export default function RadioPage() {
           ))}
         </ul>
       </PageHero>
+
+      <section id="enquiry" aria-label="Enquiry form" className="scroll-mt-20 border-b border-line py-14 lg:py-20">
+        <div className="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              eyebrow="Quick request"
+              title="Tell us what's going on"
+              description="Fill in the form and a member of the team will reply by phone or email. It's free and doesn't commit you to anything."
+            />
+            {phone && phoneHref && (
+              <a
+                href={phoneHref}
+                className="mt-6 inline-flex items-center gap-2 font-semibold text-navy-900 underline decoration-navy-900/30 underline-offset-4 hover:decoration-navy-900"
+              >
+                <PhoneIcon className="text-coral-600" /> Prefer to talk? Call {phone}
+              </a>
+            )}
+          </div>
+          <div className="border border-line bg-white p-5 sm:p-8 lg:col-span-8 lg:p-10">
+            <RadioEnquiryForm />
+          </div>
+        </div>
+      </section>
 
       <section id="services" aria-labelledby="services-heading" className="scroll-mt-20 py-20 lg:py-28">
         <div className="container-page">
@@ -252,7 +276,7 @@ export default function RadioPage() {
             <p className="mt-4 leading-relaxed text-muted">
               Still stuck?{" "}
               <Link
-                href="/contact"
+                href="#enquiry"
                 className="font-semibold text-navy-900 underline decoration-navy-900/30 underline-offset-4 hover:decoration-navy-900"
               >
                 Send us an enquiry
@@ -287,7 +311,7 @@ export default function RadioPage() {
               Tell us what your radio is doing and we&apos;ll help you find the next step.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <ButtonLink href="/contact" size="lg">
+              <ButtonLink href="#enquiry" size="lg">
                 Send an enquiry
               </ButtonLink>
               {phone && phoneHref && (
